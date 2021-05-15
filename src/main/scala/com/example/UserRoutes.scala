@@ -11,6 +11,9 @@ import akka.actor.typed.ActorSystem
 import akka.actor.typed.scaladsl.AskPattern._
 import akka.util.Timeout
 
+/**
+ * https://developer.lightbend.com/guides/akka-http-quickstart-scala/http-server.html
+ */
 //#import-json-formats
 //#user-routes-class
 class UserRoutes(userRegistry: ActorRef[UserRegistry.Command])(implicit val system: ActorSystem[_]) {

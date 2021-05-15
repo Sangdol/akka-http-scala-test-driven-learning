@@ -11,6 +11,9 @@ final case class User(name: String, age: Int, countryOfResidence: String)
 final case class Users(users: immutable.Seq[User])
 //#user-case-classes
 
+/**
+ * https://developer.lightbend.com/guides/akka-http-quickstart-scala/backend-actor.html
+ */
 object UserRegistry {
   // actor protocol
   sealed trait Command

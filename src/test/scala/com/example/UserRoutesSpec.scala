@@ -10,12 +10,22 @@ import org.scalatest.concurrent.ScalaFutures
 import org.scalatest.matchers.should.Matchers
 import org.scalatest.wordspec.AnyWordSpec
 
+
+/**
+ * Guide
+ * https://developer.lightbend.com/guides/akka-http-quickstart-scala/testing-routes.html
+ *
+ * Matchers: something should ===(somethingElse)
+ * https://www.scalatest.org/user_guide/using_matchers
+ *
+ */
 //#set-up
 class UserRoutesSpec extends AnyWordSpec with Matchers with ScalaFutures with ScalatestRouteTest {
   //#test-top
 
   // the Akka HTTP route testkit does not yet support a typed actor system (https://github.com/akka/akka-http/issues/2036)
   // so we have to adapt for now
+  // Akka TestKit https://doc.akka.io/docs/akka/current/testing.html
   lazy val testKit = ActorTestKit()
   implicit def typedSystem = testKit.system
   override def createActorSystem(): akka.actor.ActorSystem =
@@ -25,6 +35,7 @@ class UserRoutesSpec extends AnyWordSpec with Matchers with ScalaFutures with Sc
   // We use the real UserRegistryActor to test it while we hit the Routes,
   // but we could "mock" it by implementing it in-place or by using a TestProbe
   // created with testKit.createTestProbe()
+  // (So technically these are actually integration tests than unit tests.)
   val userRegistry = testKit.spawn(UserRegistry())
   lazy val routes = new UserRoutes(userRegistry).userRoutes
 
@@ -39,6 +50,8 @@ class UserRoutesSpec extends AnyWordSpec with Matchers with ScalaFutures with Sc
       // note that there's no need for the host part in the uri:
       val request = HttpRequest(uri = "/users")
 
+      // Attributes that we can check:
+      // https://doc.akka.io/docs/akka-http/current/routing-dsl/testkit.html#table-of-inspectors
       request ~> routes ~> check {
         status should ===(StatusCodes.OK)
 
