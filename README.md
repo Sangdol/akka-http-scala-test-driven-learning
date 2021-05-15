@@ -1,1 +1,1 @@
-Learning Akka HTTP. The project is based on [https://developer.lightbend.com/guides/akka-http-quickstart-scala/](https://developer.lightbend.com/guides/akka-http-quickstart-scala/).
+Learning Akka HTTP. The project is based on [Akka HTTP Quickstart for Scala](https://developer.lightbend.com/guides/akka-http-quickstart-scala/).
