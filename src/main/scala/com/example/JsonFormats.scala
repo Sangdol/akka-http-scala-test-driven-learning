@@ -2,7 +2,6 @@ package com.example
 
 import com.example.UserRegistry.ActionPerformed
 
-//#json-formats
 import spray.json.DefaultJsonProtocol
 
 /**
@@ -10,8 +9,9 @@ import spray.json.DefaultJsonProtocol
  *
  * Spray JSON https://github.com/spray/spray-json
  */
-object JsonFormats  {
+object JsonFormats {
   // import the default encoders for primitive types (Int, String, Lists etc)
+
   import DefaultJsonProtocol._
 
   // Without these `complete` code in UserRoute wouldn't compile (type-safe).
@@ -21,4 +21,3 @@ object JsonFormats  {
 
   implicit val actionPerformedJsonFormat = jsonFormat1(ActionPerformed)
 }
-//#json-formats
